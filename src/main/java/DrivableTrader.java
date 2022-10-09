@@ -1,4 +1,4 @@
-/* TODO: Create a subclass of Trader named DrivableTrader
+/* [Done]TODO: Create a subclass of Trader named DrivableTrader
  * This class should be identical to Trader, except that it takes
  * only Drivable objects in its inventory, wishlist, etc.
  *
@@ -11,3 +11,22 @@
  */
 
 import java.util.List;
+
+class DrivableTrader extends Trader<Drivable> {
+    public DrivableTrader(List<Drivable> inventory, List<Drivable> wishlist, int money) {
+        super(inventory, wishlist, money);
+    }
+
+    public DrivableTrader(int money) {
+        super(money);
+    }
+
+    @Override
+    public int getSellingPrice(Drivable obj){
+        if (obj instanceof Tradable){
+            return ((Tradable) obj).getPrice() + obj.getMaxSpeed();
+        }else{
+            return Tradable.MISSING_PRICE;
+        }
+    }
+}
